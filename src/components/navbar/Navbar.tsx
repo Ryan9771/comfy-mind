@@ -2,9 +2,8 @@ import getStyle from "../../util/Styles";
 import { FaQuoteRight } from "react-icons/fa6";
 import { IoMdJournal } from "react-icons/io";
 
-// import { useParams } from "react-router-dom";
-
-// TODO: Probably some page state management
+// TODO: Probably some page state management or something
+//  to highlight the current icon in the navbar depending on the page
 function Navbar() {
     return (
         <div className={getStyle(styles, "ctn")}>
