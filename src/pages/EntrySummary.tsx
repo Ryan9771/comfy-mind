@@ -20,7 +20,7 @@ const styles = {
         "flex-col",
         "pt-5",
         "gap-5",
-        // "bg-blue-1",
+        "bg-blue-1",
     ],
 };
 export default EntrySummary;

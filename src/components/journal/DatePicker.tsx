@@ -29,6 +29,10 @@ function DatePicker() {
             label="Select a Date"
             onChange={() => null}
             value={date ? format(date, "PPP") : ""}
+            className="!text-peach"
+            labelProps={{
+              className: "text-peach"
+            }}
           />
         </PopoverHandler>
         <PopoverContent>
