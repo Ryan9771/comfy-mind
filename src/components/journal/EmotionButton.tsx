@@ -10,6 +10,7 @@ import Surprised from "../../assets/emojis/surprised.png";
 import Dissapointed from "../../assets/emojis/dissapointed.png";
 import Nervous from "../../assets/emojis/nervous.png";
 import Anxious from "../../assets/emojis/anxious.png";
+import Scared from "../../assets/emojis/scared.png";
 
 interface Props {
     emotion: Emotion;
@@ -55,6 +56,10 @@ function EmotionButton({ emotion }: Props) {
                 return (
                     <img src={Neutral} className={getStyle(styles, "img")} />
                 )
+            case Emotion.Scared:
+                return (
+                    <img src={Scared} className={getStyle(styles, "img")} />
+                )
             default:
                 return (
                     <img src={Neutral} className={getStyle(styles, "img")} />
@@ -82,6 +87,8 @@ const styles = {
         "rounded-lg",
         "bg-blue-2",
         "shadow-md",
+        "w-[92px]",
+        "h-[110px]"
     ],
     img: [
         "w-[72px]",

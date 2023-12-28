@@ -1,12 +1,23 @@
 import getStyle from "../../util/Styles";
-import Happy from "../../assets/emojis/happy.svg"
+import EmotionButton from "./EmotionButton";
+import { Emotion } from "../../util/Types";
 
 
 function EmotionSelector() {
     return (
         <div className={getStyle(styles, "ctn")}>
             <p className={getStyle(styles, "heading")}>Today I feel...</p>
-            <div>
+            <div className={getStyle(styles, "selectorCtn")}>
+                <EmotionButton emotion={Emotion.Neutral} />
+                <EmotionButton emotion={Emotion.Happy} />
+                <EmotionButton emotion={Emotion.Sad} />
+                <EmotionButton emotion={Emotion.Dissapointed} />
+                <EmotionButton emotion={Emotion.Angry} />
+                <EmotionButton emotion={Emotion.Anxious} />
+                <EmotionButton emotion={Emotion.Scared} />
+                <EmotionButton emotion={Emotion.Nervous} />
+                <EmotionButton emotion={Emotion.Stressed} />
+                <EmotionButton emotion={Emotion.Surprised} />
             </div>
         </div>
     );
@@ -24,6 +35,12 @@ const styles = {
         "text-lg",
         "text-peach",
         "font-bold",
+    ],
+    selectorCtn: [
+        "flex",
+        "items-center",
+        "gap-4",
+        "overflow-x-scroll",
     ],
 };
 
