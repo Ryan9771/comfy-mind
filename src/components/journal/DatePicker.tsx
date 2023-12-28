@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Input,
   Popover,
@@ -10,12 +11,20 @@ import { DayPicker } from "react-day-picker";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
  
 function DatePicker() {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [popOverOpen, setPopOverOpen] = useState<boolean>(false);
+
+  const handleDateChange = (date: Date | undefined) => {
+    setDate(date ? date : new Date());
+    setTimeout(() => {
+      setPopOverOpen(false);
+    }, 200); 
+  }
  
   return (
     <div className="p-24">
-      <Popover placement="bottom">
-        <PopoverHandler>
+      <Popover  placement="bottom" open={popOverOpen}>
+        <PopoverHandler onClick={() => setPopOverOpen(true)}>
           <Input
             label="Select a Date"
             onChange={() => null}
@@ -25,8 +34,8 @@ function DatePicker() {
         <PopoverContent>
           <DayPicker
             mode="single"
-            selected={date}
-            onSelect={setDate}
+            selected={date ? date : new Date()}
+            onSelect={handleDateChange}
             showOutsideDays
             className="border-0"
             classNames={{
