@@ -80,15 +80,16 @@ function EmotionButton({ emotion }: Props) {
 const styles = {
     ctn: [
         "flex",
+        "flex-shrink-0",
         "flex-col",
-        "p-2.5",
         "justify-center",
         "items-center",
         "rounded-lg",
         "bg-blue-2",
         "shadow-md",
-        "w-[92px]",
-        "h-[110px]"
+        "w-20",
+        "h-[110px]",
+        "cursor-pointer"
     ],
     img: [
         "w-[72px]",

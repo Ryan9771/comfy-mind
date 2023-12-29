@@ -12,12 +12,12 @@ function EmotionSelector() {
                 <EmotionButton emotion={Emotion.Happy} />
                 <EmotionButton emotion={Emotion.Sad} />
                 <EmotionButton emotion={Emotion.Dissapointed} />
-                <EmotionButton emotion={Emotion.Angry} />
-                <EmotionButton emotion={Emotion.Anxious} />
-                <EmotionButton emotion={Emotion.Scared} />
-                <EmotionButton emotion={Emotion.Nervous} />
-                <EmotionButton emotion={Emotion.Stressed} />
-                <EmotionButton emotion={Emotion.Surprised} />
+                {/* <EmotionButton emotion={Emotion.Angry} /> */}
+                {/* <EmotionButton emotion={Emotion.Anxious} /> */}
+                {/* <EmotionButton emotion={Emotion.Scared} /> */}
+                {/* <EmotionButton emotion={Emotion.Nervous} /> */}
+                {/* <EmotionButton emotion={Emotion.Stressed} /> */}
+                {/* <EmotionButton emotion={Emotion.Surprised} /> */}
             </div>
         </div>
     );
@@ -25,7 +25,7 @@ function EmotionSelector() {
 
 const styles = {
     ctn: [
-        "gap-2.5",
+        "gap-5",
         "pt-2.5",
         "flex",
         "flex-col",
@@ -38,6 +38,7 @@ const styles = {
     ],
     selectorCtn: [
         "flex",
+        "w-full",
         "items-center",
         "gap-4",
         "overflow-x-scroll",
