@@ -88,8 +88,8 @@ const styles = {
         "bg-blue-2",
         "shadow-md",
         "w-20",
-        "h-[110px]",
-        "cursor-pointer"
+        "cursor-pointer",
+        "pb-1",
     ],
     img: [
         "w-[72px]",
