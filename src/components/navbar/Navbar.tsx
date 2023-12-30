@@ -20,7 +20,12 @@ const styles = {
         "justify-between",
         "items-center",
         "bg-blue-1",
-        "pt-5"
+        "pt-5",
+        "fixed",
+        "top-0",
+        "left-0",
+        "right-0",
+        "z-50",
     ],
 };
 

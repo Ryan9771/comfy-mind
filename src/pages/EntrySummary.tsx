@@ -30,10 +30,11 @@ const styles = {
         "h-full",
         "flex",
         "flex-col",
-        "pt-5",
+        "pt-10",
         "gap-5",
         "bg-blue-1",
         "lg:flex-row",
+        "lg:pt-12"
     ],
     metadataCtn: [
         "flex",
@@ -48,6 +49,7 @@ const styles = {
         "w-full",
         "h-full",
         "p-1",
+        "md:px-3",
         "lg:px-5",
         "xl:pr-7"
     ],
@@ -66,7 +68,7 @@ const styles = {
         "text-xl",
         "text-blue-2",
         "tracking-tight",
-        "lg:text-2xl",
+        "lg:text-1xl",
     ],
     btnWrapper: [
         "flex",
