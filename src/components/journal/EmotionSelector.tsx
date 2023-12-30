@@ -35,7 +35,6 @@ const styles = {
     heading: [
         "text-lg",
         "text-peach",
-        "font-bold",
     ],
     selectorCtn: [
         "flex",

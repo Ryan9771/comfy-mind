@@ -12,6 +12,7 @@ function EntrySummary() {
                 <DatePicker />
                 <EmotionSelector />
             </div>
+            <div className={getStyle(styles, "bodyCtn")}></div>
         </div>
     );
 }
@@ -31,6 +32,17 @@ const styles = {
         "flex-col",
         "p-4",
         "gap-6"
+    ],
+    bodyCtn: [
+        "flex",
+        "flex-col",
+        "w-full",
+        "h-full",
+        "px-8",
+        "pt-9",
+        "bg-peach",
+        "rounded-t-3xl",
+
     ],
 };
 export default EntrySummary;
