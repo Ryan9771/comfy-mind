@@ -11,11 +11,13 @@ function EntrySummary() {
                 <DatePicker />
                 <EmotionSelector />
             </div>
-            <div className={getStyle(styles, "bodyCtn")}>
-                <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
-                <EntryBox />
-                <div className={getStyle(styles, "btnWrapper")}>
-                    <AnalyseButton />
+            <div className={getStyle(styles, "bodyCtnWrapper")}>
+                <div className={getStyle(styles, "bodyCtn")}>
+                    <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
+                    <EntryBox />
+                    <div className={getStyle(styles, "btnWrapper")}>
+                        <AnalyseButton />
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,7 +40,14 @@ const styles = {
         "flex-col",
         "p-4",
         "gap-3",
-        "lg:justify-center"
+        "lg:items-center",
+        "lg:gap-24"
+    ],
+    bodyCtnWrapper: [
+        "flex",
+        "w-full",
+        "h-full",
+        "p-1"
     ],
     bodyCtn: [
         "flex",
