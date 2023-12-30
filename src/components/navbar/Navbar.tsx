@@ -19,6 +19,8 @@ const styles = {
         "px-6",
         "justify-between",
         "items-center",
+        "bg-blue-1",
+        "pt-5"
     ],
 };
 

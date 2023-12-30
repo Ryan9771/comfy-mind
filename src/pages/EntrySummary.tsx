@@ -1,6 +1,4 @@
 import getStyle from "../util/Styles";
-
-import Navbar from "../components/navbar/Navbar";
 import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import EntryBox from "../components/journal/EntryBox";
@@ -9,7 +7,6 @@ import AnalyseButton from "../components/journal/AnalyseButton";
 function EntrySummary() {
     return (
         <div className={getStyle(styles, "ctn")}>
-            <Navbar />
             <div className={getStyle(styles, "metadataCtn")}>
                 <DatePicker />
                 <EmotionSelector />
@@ -34,12 +31,14 @@ const styles = {
         "pt-5",
         "gap-5",
         "bg-blue-1",
+        "lg:flex-row",
     ],
     metadataCtn: [
         "flex",
         "flex-col",
         "p-4",
-        "gap-3"
+        "gap-3",
+        "lg:justify-center"
     ],
     bodyCtn: [
         "flex",

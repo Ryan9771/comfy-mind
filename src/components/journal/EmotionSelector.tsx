@@ -43,6 +43,7 @@ const styles = {
         "gap-4",
         "overflow-x-auto",
         "pb-3",
+        "lg:flex-wrap"
     ],
 };
 
