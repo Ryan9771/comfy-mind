@@ -87,13 +87,12 @@ const styles = {
         "rounded-lg",
         "bg-blue-2",
         "shadow-md",
-        "w-20",
         "cursor-pointer",
         "pb-1",
     ],
     img: [
-        "w-[72px]",
-        "h-[72px]",
+        "w-14",
+        "h-14",
     ],
     txt: [
         "text-peach"

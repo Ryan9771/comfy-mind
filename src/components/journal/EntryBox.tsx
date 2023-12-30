@@ -14,7 +14,7 @@ const styles = {
         "p-4",
         "rounded-xl",
         "tracking-tight",
-        "h-full",
+        "h-4/6",
         "overflow-y-auto",
         "leading-5",
     ],
