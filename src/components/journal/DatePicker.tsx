@@ -39,7 +39,7 @@ function DatePicker() {
               label="Select a Date"
               onChange={() => null}
               value={date ? format(date, "PPP") : ""}
-              className="text-peach text-xl !border !border-dotted "
+              className="text-peach text-xl !border-2 !border-dotted "
               labelProps={{
                 className: "text-peach"
               }}
