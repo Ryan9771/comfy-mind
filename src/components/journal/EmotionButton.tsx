@@ -93,6 +93,10 @@ const styles = {
     img: [
         "w-14",
         "h-14",
+        "md:w-16",
+        "md:h-16",
+        "lg:w-20",
+        "lg:h-20"
     ],
     txt: [
         "text-peach"

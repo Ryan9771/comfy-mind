@@ -47,7 +47,9 @@ const styles = {
         "flex",
         "w-full",
         "h-full",
-        "p-1"
+        "p-1",
+        "lg:px-5",
+        "xl:pr-7"
     ],
     bodyCtn: [
         "flex",
@@ -64,6 +66,7 @@ const styles = {
         "text-xl",
         "text-blue-2",
         "tracking-tight",
+        "lg:text-2xl",
     ],
     btnWrapper: [
         "flex",

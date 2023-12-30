@@ -30,12 +30,14 @@ const styles = {
         "pt-2.5",
         "flex",
         "flex-col",
-        "px-4"
+        "px-4",
+        "lg:gap-8",
     ],
     heading: [
         "text-lg",
         "text-peach",
-        "lg:text-center"
+        "lg:text-center",
+        "lg:text-xl"
     ],
     selectorCtn: [
         "flex",
@@ -45,7 +47,7 @@ const styles = {
         "overflow-x-auto",
         "pb-3",
         "lg:flex-wrap",
-        "lg:justify-center"
+        "lg:justify-center",
     ],
 };
 
