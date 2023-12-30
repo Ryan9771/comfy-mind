@@ -12,7 +12,9 @@ function EntrySummary() {
                 <DatePicker />
                 <EmotionSelector />
             </div>
-            <div className={getStyle(styles, "bodyCtn")}></div>
+            <div className={getStyle(styles, "bodyCtn")}>
+                <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
+            </div>
         </div>
     );
 }
@@ -42,7 +44,11 @@ const styles = {
         "pt-9",
         "bg-peach",
         "rounded-t-3xl",
-
+    ],
+    bodyHeading: [
+        "text-lg",
+        "text-blue-2",
+        "tracking-tight",
     ],
 };
 export default EntrySummary;
