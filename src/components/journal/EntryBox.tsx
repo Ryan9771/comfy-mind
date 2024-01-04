@@ -4,7 +4,7 @@ import getStyle from "../../util/Styles";
 
 function EntryBox() {
     return (
-        <textarea placeholder="Tap to write how you feel today..." className={getStyle(styles, "input")} />
+        <textarea placeholder="Edit to write how you feel today..." className={getStyle(styles, "input")} />
     );
 }
 
