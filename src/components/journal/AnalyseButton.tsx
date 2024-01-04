@@ -21,6 +21,8 @@ const styles = {
         "py-[6px]",
         "flex",
         "items-center",
+        "cursor-pointer",
+        "hover:bg-blue-2",
     ],
     icon: [
         "fill-white",

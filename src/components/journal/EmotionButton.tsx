@@ -89,6 +89,7 @@ const styles = {
         "shadow-md",
         "cursor-pointer",
         "pb-1",
+        "hover:bg-blue-3"
     ],
     img: [
         "w-14",

@@ -11,6 +11,7 @@ module.exports = withMT({
       colors: {
         "blue-1": "#474973",
         "blue-2": "#1D264F",
+        "blue-3": "#151b38",
         "peach": "#F1DAC4",
         "green-1": '#3B8583',
       },
