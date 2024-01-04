@@ -61,7 +61,7 @@ const styles = {
         "px-8",
         "pt-5",
         "bg-peach",
-        "rounded-t-3xl",
+        "rounded-3xl",
         "gap-6",
     ],
     bodyHeading: [
