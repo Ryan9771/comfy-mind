@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import getStyle from "../../util/Styles";
-import { Emotion } from "../../util/Types";
+import { Emotion, emotionToString } from "../../util/Types";
 import Happy from "../../assets/emojis/happy.png";
 import Sad from "../../assets/emojis/sad.png";
 import Neutral from "../../assets/emojis/neutral.png";
@@ -72,7 +72,7 @@ function EmotionButton({ emotion }: Props) {
     return (
         <div className={getStyle(styles, "ctn")}>
             <Image />
-            <p className={getStyle(styles, "txt")}>{emotion}</p>
+            <p className={getStyle(styles, "txt")}>{emotionToString(emotion)}</p>
         </div>
     );
 }
@@ -89,7 +89,8 @@ const styles = {
         "shadow-md",
         "cursor-pointer",
         "pb-1",
-        "hover:bg-blue-3"
+        "hover:bg-blue-3",
+        "px-1",
     ],
     img: [
         "w-14",
@@ -100,7 +101,8 @@ const styles = {
         "lg:h-20"
     ],
     txt: [
-        "text-peach"
+        "text-peach",
+        "text-sm",
     ],
 
 }

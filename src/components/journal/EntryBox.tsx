@@ -1,6 +1,7 @@
 import getStyle from "../../util/Styles";
 
-// TOOD: Change 'tap' to 'click' on desktop
+// TODD: Change 'tap' to 'click' on desktop
+// TODO: Validation check for empty entry & max word limit entry
 
 function EntryBox() {
     return (
