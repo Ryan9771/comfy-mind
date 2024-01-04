@@ -13,8 +13,10 @@ function EntrySummary() {
             </div>
             <div className={getStyle(styles, "bodyCtnWrapper")}>
                 <div className={getStyle(styles, "bodyCtn")}>
-                    <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
-                    <EntryBox />
+                    <div className={getStyle(styles, "entryCtnWrapper")}>
+                        <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
+                        <EntryBox />
+                    </div>
                     <div className={getStyle(styles, "btnWrapper")}>
                         <AnalyseButton />
                     </div>
@@ -62,7 +64,7 @@ const styles = {
         "pt-5",
         "bg-peach",
         "rounded-3xl",
-        "gap-6",
+        // "gap-6",
     ],
     bodyHeading: [
         "text-xl",
@@ -75,6 +77,14 @@ const styles = {
         "w-full",
         "justify-center",
         "items-center",
+        "h-1/6",
+    ],
+    entryCtnWrapper: [
+        "flex",
+        "flex-col",
+        "w-full",
+        "gap-6",
+        "h-5/6"
     ],
 };
 export default EntrySummary;
