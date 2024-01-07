@@ -13,10 +13,12 @@ import Anxious from "../../assets/emojis/anxious.png";
 import Scared from "../../assets/emojis/scared.png";
 
 interface Props {
+    clickHandler: (emotion: Emotion) => void;
+    chosenEmotion: Emotion;
     emotion: Emotion;
 }
 
-function EmotionButton({ emotion }: Props) {
+function EmotionButton({ clickHandler, chosenEmotion, emotion }: Props) {
 
     const Image = useCallback(() => {
         switch(emotion) {
@@ -70,15 +72,15 @@ function EmotionButton({ emotion }: Props) {
 
 
     return (
-        <div className={getStyle(styles, "ctn")}>
+        <div onClick={() => clickHandler(emotion)} className={chosenEmotion === emotion ? getStyle(styles, "ctnSelected") : getStyle(styles, "ctnDefault")}>
             <Image />
-            <p className={getStyle(styles, "txt")}>{emotionToString(emotion)}</p>
+            <p className={chosenEmotion === emotion ? getStyle(styles, "txtSelected") : getStyle(styles, "txtDefault")}>{emotionToString(emotion)}</p>
         </div>
     );
 }
 
 const styles = {
-    ctn: [
+    ctnDefault: [
         "flex",
         "flex-shrink-0",
         "flex-col",
@@ -92,6 +94,19 @@ const styles = {
         "hover:bg-blue-3",
         "px-1",
     ],
+    ctnSelected: [
+        "flex",
+        "flex-shrink-0",
+        "flex-col",
+        "justify-center",
+        "items-center",
+        "rounded-lg",
+        "bg-white",
+        "shadow-md",
+        "cursor-pointer",
+        "pb-1",
+        "px-1",
+    ],
     img: [
         "w-14",
         "h-14",
@@ -100,8 +115,12 @@ const styles = {
         "lg:w-20",
         "lg:h-20"
     ],
-    txt: [
+    txtDefault: [
         "text-peach",
+        "text-sm",
+    ],
+    txtSelected: [
+        "text-black",
         "text-sm",
     ],
 
