@@ -30,9 +30,11 @@ const styles = {
     ],
     saveBtn: [
         "bg-green-1",
+        "hover:bg-green-2"
     ],
     doneBtn: [
         "bg-blue-1",
+        "hover:bg-blue-2",
     ],
     icon: [
         "fill-white",
