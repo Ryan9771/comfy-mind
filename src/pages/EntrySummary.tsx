@@ -2,7 +2,7 @@ import getStyle from "../util/Styles";
 import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import EntryBox from "../components/journal/EntryBox";
-import { AnalyseButton } from "../components/journal/Buttons";
+import { AnalyseButton, SaveButton, DoneButton } from "../components/journal/Buttons";
 import { useState } from 'react';
 
 // TODO: Try using local storage first to store dates and their entries
@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 function EntrySummary() {
     
-    const [entryEditable, setEntryEditable] = useState<boolean>(false);
+    const [entryEditable, setEntryEditable] = useState<boolean>(true);
 
     return (
         <div className={getStyle(styles, "ctn")}>
@@ -28,7 +28,12 @@ function EntrySummary() {
                         <EntryBox />
                     </div>
                     <div className={getStyle(styles, "btnsWrapper")}>
-                        <AnalyseButton onClick={() => console.log("Analyse button clicked")} />
+                        { entryEditable ? <AnalyseButton onClick={() => console.log("Analyse button clicked")} /> : (
+                            <div className={getStyle(styles, "editBtnsCtn")}>
+                                <DoneButton onClick={() => console.log("Done button clicked")} />
+                                <SaveButton onClick={() => console.log("Save button clicked")} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -74,7 +79,6 @@ const styles = {
         "pt-5",
         "bg-peach",
         "rounded-3xl",
-        // "gap-6",
     ],
     bodyHeading: [
         "text-xl",
@@ -95,6 +99,12 @@ const styles = {
         "w-full",
         "gap-6",
         "h-5/6"
+    ],
+    editBtnsCtn: [
+        "flex",
+        "w-full",
+        "items-center",
+        "justify-around",
     ],
 };
 export default EntrySummary;

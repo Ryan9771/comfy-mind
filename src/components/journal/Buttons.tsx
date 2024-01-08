@@ -25,11 +25,10 @@ const styles = {
         "items-center",
         "rounded-lg",
         "cursor-pointer",
-        "tracking-tighter",
         "px-2",
         "py-1.5"
     ],
-    savebtn: [
+    saveBtn: [
         "bg-green-1",
     ],
     doneBtn: [
@@ -45,7 +44,7 @@ const styles = {
 export const SaveButton = ({ onClick }: { onClick: () => void }) => {
     return (
         <div 
-            className={getStyle(styles, "buttonGeneral") +  getStyle(styles, "saveBtn")}
+            className={getStyle(styles, "buttonGeneral") + getStyle(styles, "saveBtn")}
             onClick={() => onClick()}
         >
             <IoIosSave className={getStyle(styles, "icon")} />
@@ -57,11 +56,11 @@ export const SaveButton = ({ onClick }: { onClick: () => void }) => {
 export const DoneButton = ({ onClick }: { onClick: () => void }) => {
     return (
         <div 
-            className={getStyle(styles, "buttonGeneral") +  getStyle(styles, "doneBtn")}
+            className={getStyle(styles, "buttonGeneral") + getStyle(styles, "doneBtn")}
             onClick={() => onClick()}
         >
             <RxCross2 className={getStyle(styles, "icon")} />
-            <div>Save</div>
+            <div>Done</div>
         </div>
     );
 }
@@ -69,7 +68,7 @@ export const DoneButton = ({ onClick }: { onClick: () => void }) => {
 export const AnalyseButton = ({ onClick }: { onClick: () => void }) => {
     return (
         <div 
-            className={getStyle(styles, "buttonGeneral") +  getStyle(styles, "analyseBtn")}
+            className={getStyle(styles, "buttonGeneral") + getStyle(styles, "analyseBtn")}
             onClick={() => onClick()}
         >
             <GiBrain className={getStyle(styles, "icon")} />
