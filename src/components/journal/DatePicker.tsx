@@ -10,8 +10,6 @@ import { DayPicker } from "react-day-picker";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import getStyle from "../../util/Styles";
 
-// TODO: Change thickness on date picker
- 
 function DatePicker() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [popOverOpen, setPopOverOpen] = useState<boolean>(false);

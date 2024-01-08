@@ -1,11 +1,25 @@
 import getStyle from "../../util/Styles";
+import { useState } from 'react';
 
 // TODD: Change 'tap' to 'click' on desktop
-// TODO: Validation check for empty entry & max word limit entry
+// TODO: Validation check for empty entry
 
 function EntryBox() {
+
+    const [entry, setEntry] = useState<string>("");
+
+    const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setEntry(e.target.value);
+    }
+
     return (
-        <textarea placeholder="Edit to write how you feel today..." className={getStyle(styles, "input")} />
+        <textarea 
+            value={entry} 
+            onChange={handleEntryChange} 
+            placeholder="Edit to write how you feel today..." 
+            className={getStyle(styles, "input")} 
+            maxLength={600}
+        />
     );
 }
 
@@ -18,6 +32,7 @@ const styles = {
         "h-full",
         "overflow-y-auto",
         "leading-5",
+        "focus:outline-none",
     ],
 
 }

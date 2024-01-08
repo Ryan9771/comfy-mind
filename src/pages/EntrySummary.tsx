@@ -4,6 +4,8 @@ import EmotionSelector from "../components/journal/EmotionSelector";
 import EntryBox from "../components/journal/EntryBox";
 import AnalyseButton from "../components/journal/AnalyseButton";
 
+// TODO: Try using local storage first to store dates and their entries
+
 function EntrySummary() {
     return (
         <div className={getStyle(styles, "ctn")}>
