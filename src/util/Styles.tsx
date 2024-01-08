@@ -3,5 +3,5 @@ interface RawStyle {
 }
 
 export default function getStyle(styles: RawStyle, style: string) {
-    return styles[style].join(' ');
+    return styles[style].join(' ') + ' ';
 }
