@@ -5,6 +5,7 @@ import EntryBox from "../components/journal/EntryBox";
 import AnalyseButton from "../components/journal/AnalyseButton";
 
 // TODO: Try using local storage first to store dates and their entries
+// TODO: Add link between edit buttons and entry box
 
 function EntrySummary() {
     return (
