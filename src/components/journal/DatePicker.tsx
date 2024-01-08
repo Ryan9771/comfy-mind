@@ -37,7 +37,7 @@ function DatePicker() {
               label="Select a Date"
               onChange={() => null}
               value={date ? format(date, "PPP") : ""}
-              className="flex items-center text-center text-peach text-xl !border-2 !border-dotted lg:text-3xl lg:py-7"
+              className="flex items-center text-center text-peach text-xl !border-2 !border-dotted lg:text-3xl lg:py-7 cursor-pointer"
               labelProps={{
                 className: "text-peach"
               }}
