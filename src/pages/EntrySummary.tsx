@@ -2,7 +2,7 @@ import getStyle from "../util/Styles";
 import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import EntryBox from "../components/journal/EntryBox";
-import AnalyseButton from "../components/journal/AnalyseButton";
+import { AnalyseButton } from "../components/journal/Buttons";
 import { useState } from 'react';
 
 // TODO: Try using local storage first to store dates and their entries
@@ -27,8 +27,8 @@ function EntrySummary() {
                         <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
                         <EntryBox />
                     </div>
-                    <div className={getStyle(styles, "btnWrapper")}>
-                        <AnalyseButton />
+                    <div className={getStyle(styles, "btnsWrapper")}>
+                        <AnalyseButton onClick={() => console.log("Analyse button clicked")} />
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ const styles = {
         "tracking-tight",
         "lg:text-1xl",
     ],
-    btnWrapper: [
+    btnsWrapper: [
         "flex",
         "w-full",
         "justify-center",
