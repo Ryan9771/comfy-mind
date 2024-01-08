@@ -10,7 +10,16 @@ import { useState } from 'react';
 
 function EntrySummary() {
     
-    const [entryEditable, setEntryEditable] = useState<boolean>(true);
+    const [entryEditable, setEntryEditable] = useState<boolean>(false);
+    const handleSave = () => {
+        console.log("Save button clicked")
+        setEntryEditable(true);
+    }
+
+    const handleDone = () => {
+        setEntryEditable(false);
+        console.log("Done button clicked");
+    }
 
     return (
         <div className={getStyle(styles, "ctn")}>
@@ -28,10 +37,10 @@ function EntrySummary() {
                         <EntryBox />
                     </div>
                     <div className={getStyle(styles, "btnsWrapper")}>
-                        { entryEditable ? <AnalyseButton onClick={() => console.log("Analyse button clicked")} /> : (
+                        { !entryEditable ? <AnalyseButton onClick={() => console.log("Analyse button clicked")} /> : (
                             <div className={getStyle(styles, "editBtnsCtn")}>
-                                <DoneButton onClick={() => console.log("Done button clicked")} />
-                                <SaveButton onClick={() => console.log("Save button clicked")} />
+                                <DoneButton onClick={handleDone} />
+                                <SaveButton onClick={handleSave} />
                             </div>
                         )}
                     </div>
