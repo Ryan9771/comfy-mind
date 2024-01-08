@@ -7,7 +7,6 @@ import { useState } from 'react';
 function EntryBox() {
 
     const [entry, setEntry] = useState<string>("");
-
     const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setEntry(e.target.value);
     }

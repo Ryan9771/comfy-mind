@@ -3,11 +3,15 @@ import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import EntryBox from "../components/journal/EntryBox";
 import AnalyseButton from "../components/journal/AnalyseButton";
+import { useState } from 'react';
 
 // TODO: Try using local storage first to store dates and their entries
 // TODO: Add link between edit buttons and entry box
 
 function EntrySummary() {
+    
+    const [entryEditable, setEntryEditable] = useState<boolean>(false);
+
     return (
         <div className={getStyle(styles, "ctn")}>
             <div className={getStyle(styles, "metadataCtn")}>
@@ -16,7 +20,10 @@ function EntrySummary() {
             </div>
             <div className={getStyle(styles, "bodyCtnWrapper")}>
                 <div className={getStyle(styles, "bodyCtn")}>
-                    <div className={getStyle(styles, "entryCtnWrapper")}>
+                    <div 
+                        className={getStyle(styles, "entryCtnWrapper")} 
+                        onClick={() => setEntryEditable(!entryEditable)}
+                    >
                         <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
                         <EntryBox />
                     </div>
