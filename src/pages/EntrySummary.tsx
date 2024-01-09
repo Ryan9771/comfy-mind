@@ -2,16 +2,17 @@ import getStyle from "../util/Styles";
 import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import { AnalyseButton, SaveButton, DoneButton } from "../components/journal/Buttons";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Emotion, JournalEntry } from "../util/Types";
+import { getStorageValue, setStorageValue } from "../util/LocalStorage";
 
 // TODO: Try using local storage first to store dates and their entries
 
 function EntrySummary() {
     /* === Entry Text State Management === */
-    const [entry, setEntry] = useState<string>("");
+    const [entryText, setEntryText] = useState<string>("");
     const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setEntry(e.target.value);
+        setEntryText(e.target.value);
     }
 
     /* === Emotion State Management */
@@ -27,9 +28,9 @@ function EntrySummary() {
         const entryData: JournalEntry = {
             date: entryDate,
             emotion: emotion,
-            entry: entry
+            entryText: entryText,
         };
-        console.log(entryData);
+        setStorageValue(entryDate.toDateString(), entryData);
     }
 
     const handleDone = () => {
@@ -37,11 +38,21 @@ function EntrySummary() {
         console.log("Done button clicked");
     }
 
+    /* === Load Data into correct states using local storage === */
+    useEffect(() => {
+        const entryData = getStorageValue(entryDate.toDateString());
+        if (entryData) {
+            console.log(entryData);
+            setEntryText(entryData.entryText);
+            setEmotion(entryData.emotion);
+        }
+    }, []);
+
     return (
         <div className={getStyle(styles, "ctn")}>
             <div className={getStyle(styles, "metadataCtn")}>
-                <DatePicker onChangeDate={setEntryDate} />
-                <EmotionSelector onChangeEmotion={setEmotion} />
+                <DatePicker givenDate={entryDate} onChangeDate={setEntryDate} />
+                <EmotionSelector givenEmotion={emotion} onChangeEmotion={setEmotion} />
             </div>
             <div className={getStyle(styles, "bodyCtnWrapper")}>
                 <div className={getStyle(styles, "bodyCtn")}>
@@ -51,7 +62,7 @@ function EntrySummary() {
                     >
                         <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
                         <textarea 
-                            value={entry} 
+                            value={entryText} 
                             onChange={handleEntryChange} 
                             placeholder="Edit to write how you feel today..." 
                             className={getStyle(styles, "input")} 

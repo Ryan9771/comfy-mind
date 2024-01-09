@@ -41,7 +41,7 @@ export function emotionToString(emotion: Emotion): string {
 export interface JournalEntry {
     date: Date;
     emotion: Emotion;
-    entry: string;
+    entryText: string;
 }
 
 export interface JournalEntries {

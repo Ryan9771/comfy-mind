@@ -11,11 +11,12 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import getStyle from "../../util/Styles";
 
 interface Props {
+  givenDate: Date;
   onChangeDate: (date: Date) => void;
 }
 
-function DatePicker({ onChangeDate }: Props) {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+function DatePicker({ givenDate, onChangeDate }: Props) {
+  const [date, setDate] = useState<Date | undefined>(givenDate);
   const [popOverOpen, setPopOverOpen] = useState<boolean>(false);
 
   const handleDateChange = (date: Date | undefined) => {
