@@ -1,4 +1,3 @@
-import { useState } from "react";
 import getStyle from "../../util/Styles";
 import EmotionButton from "./EmotionButton";
 import { Emotion } from "../../util/Types";
@@ -12,10 +11,7 @@ interface Props {
 
 function EmotionSelector({ givenEmotion, onChangeEmotion }: Props) {
 
-    const [chosenEmotion, setChosenEmotion] = useState<Emotion>(givenEmotion);
-
     const clickHandler = (emotion: Emotion) => {
-        setChosenEmotion(emotion);
         onChangeEmotion(emotion);
     }
 
@@ -23,16 +19,16 @@ function EmotionSelector({ givenEmotion, onChangeEmotion }: Props) {
         <div className={getStyle(styles, "ctn")}>
             <p className={getStyle(styles, "heading")}>Today I feel...</p>
             <div className={getStyle(styles, "selectorCtn")}>
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Neutral} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Happy} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Sad} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Dissapointed} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Angry} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Anxious} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Scared} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Nervous} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Stressed} />
-                <EmotionButton clickHandler={clickHandler} chosenEmotion={chosenEmotion} emotion={Emotion.Surprised} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Neutral} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Happy} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Sad} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Dissapointed} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Angry} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Anxious} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Scared} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Nervous} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Stressed} />
+                <EmotionButton clickHandler={clickHandler} chosenEmotion={givenEmotion} emotion={Emotion.Surprised} />
             </div>
         </div>
     );

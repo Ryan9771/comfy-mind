@@ -19,7 +19,6 @@ interface Props {
 }
 
 function EmotionButton({ clickHandler, chosenEmotion, emotion }: Props) {
-
     const Image = useCallback(() => {
         switch(emotion) {
             case Emotion.Happy:
@@ -67,9 +66,7 @@ function EmotionButton({ clickHandler, chosenEmotion, emotion }: Props) {
                     <img src={Neutral} className={getStyle(styles, "img")} />
                 )
         }
-    }, [emotion])
-
-
+    }, [chosenEmotion, emotion])
 
     return (
         <div onClick={() => clickHandler(emotion)} className={chosenEmotion === emotion ? getStyle(styles, "ctnSelected") : getStyle(styles, "ctnDefault")}>
