@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 import { Emotion, JournalEntry } from "../util/Types";
 import { getStorageValue, setStorageValue } from "../util/LocalStorage";
 
-// TODO: Try using local storage first to store dates and their entries
+// TODO: Fix bug where sometimes clicking on entry doesn't cause buttons 
+//  to appear. Eg: Highlight entry and delete -> Doesnt cause buttons to show
+//  Potential Fix: Maybe instead of onClick, use onFocus and let the user click 
+//      cancel to remove buttons.
 
 function EntrySummary() {
     /* === Entry Text State Management === */
@@ -46,7 +49,7 @@ function EntrySummary() {
             setEntryText(entryData.entryText);
             setEmotion(entryData.emotion);
         }
-    }, []);
+    }, [entryDate]);
 
     return (
         <div className={getStyle(styles, "ctn")}>
