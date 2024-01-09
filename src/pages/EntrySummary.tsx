@@ -18,8 +18,12 @@ function EntrySummary() {
         setEntryText(e.target.value);
     }
 
-    /* === Emotion State Management */
+    /* === Emotion Related State Management */
     const [emotion, setEmotion] = useState<Emotion>(Emotion.Neutral);
+    const handleEmotionChange = (emotion: Emotion) => {
+        setEmotion(emotion);
+        setEntryEditable(true);
+    }
 
     /* === Date Picker State Management === */
     const [entryDate, setEntryDate] = useState<Date>(new Date());
@@ -33,7 +37,6 @@ function EntrySummary() {
             emotion: emotion,
             entryText: entryText,
         };
-        console.log("=== Save button clicked ===");
         setStorageValue(entryDate.toDateString(), entryData);
         console.log("=== Entry Submitted ===");
         console.log(entryData);
@@ -61,7 +64,7 @@ function EntrySummary() {
         <div className={getStyle(styles, "ctn")}>
             <div className={getStyle(styles, "metadataCtn")}>
                 <DatePicker givenDate={entryDate} onChangeDate={setEntryDate} />
-                <EmotionSelector givenEmotion={emotion} onChangeEmotion={setEmotion} />
+                <EmotionSelector givenEmotion={emotion} onChangeEmotion={handleEmotionChange} />
             </div>
             <div className={getStyle(styles, "bodyCtnWrapper")}>
                 <div className={getStyle(styles, "bodyCtn")}>
