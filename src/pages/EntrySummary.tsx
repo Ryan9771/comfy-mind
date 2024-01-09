@@ -3,17 +3,33 @@ import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
 import { AnalyseButton, SaveButton, DoneButton } from "../components/journal/Buttons";
 import { useState } from 'react';
+import { Emotion, JournalEntry } from "../util/Types";
 
 // TODO: Try using local storage first to store dates and their entries
 
 function EntrySummary() {
-    
+    /* === Entry Text State Management === */
+    const [entry, setEntry] = useState<string>("");
+    const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setEntry(e.target.value);
+    }
+
+    /* === Emotion State Management */
+    const [emotion, setEmotion] = useState<Emotion>(Emotion.Neutral);
+
+    /* === Date State Management === */
+    const [entryDate, setEntryDate] = useState<Date>(new Date());
+
     /* === Edit buttons state management === */
     const [entryEditable, setEntryEditable] = useState<boolean>(false);
     const handleSave = () => {
-        console.log("Save button clicked")
         setEntryEditable(true);
-        console.log(entry);
+        const entryData: JournalEntry = {
+            date: entryDate,
+            emotion: emotion,
+            entry: entry
+        };
+        console.log(entryData);
     }
 
     const handleDone = () => {
@@ -21,17 +37,11 @@ function EntrySummary() {
         console.log("Done button clicked");
     }
 
-    /* === Entry text state management === */
-    const [entry, setEntry] = useState<string>("");
-    const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setEntry(e.target.value);
-    }
-
     return (
         <div className={getStyle(styles, "ctn")}>
             <div className={getStyle(styles, "metadataCtn")}>
-                <DatePicker />
-                <EmotionSelector />
+                <DatePicker onChangeDate={setEntryDate} />
+                <EmotionSelector onChangeEmotion={setEmotion} />
             </div>
             <div className={getStyle(styles, "bodyCtnWrapper")}>
                 <div className={getStyle(styles, "bodyCtn")}>

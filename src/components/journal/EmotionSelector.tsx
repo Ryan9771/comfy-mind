@@ -5,12 +5,17 @@ import { Emotion } from "../../util/Types";
 
 // TODO: Reorder these buttons to match the order of the enum
 
-function EmotionSelector() {
+interface Props {
+    onChangeEmotion: (emotion: Emotion) => void;
+}
+
+function EmotionSelector({ onChangeEmotion }: Props) {
 
     const [chosenEmotion, setChosenEmotion] = useState<Emotion>(Emotion.Neutral);
 
     const clickHandler = (emotion: Emotion) => {
         setChosenEmotion(emotion);
+        onChangeEmotion(emotion);
     }
 
     return (

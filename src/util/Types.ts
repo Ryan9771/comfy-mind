@@ -37,3 +37,16 @@ export function emotionToString(emotion: Emotion): string {
             return "neutral";
     }
 }
+
+export interface JournalEntry {
+    date: Date;
+    emotion: Emotion;
+    entry: string;
+}
+
+export interface JournalEntries {
+    [key: string]: JournalEntry;
+}
+
+/* === Local Storage Navigation === */
+// journalDb -> { (hash(journalEntry.date) -> journalEntry) }
