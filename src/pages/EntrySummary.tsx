@@ -21,7 +21,7 @@ function EntrySummary() {
     /* === Emotion State Management */
     const [emotion, setEmotion] = useState<Emotion>(Emotion.Neutral);
 
-    /* === Date State Management === */
+    /* === Date Picker State Management === */
     const [entryDate, setEntryDate] = useState<Date>(new Date());
 
     /* === Edit buttons state management === */
@@ -33,7 +33,10 @@ function EntrySummary() {
             emotion: emotion,
             entryText: entryText,
         };
+        console.log("=== Save button clicked ===");
         setStorageValue(entryDate.toDateString(), entryData);
+        console.log("=== Entry Submitted ===");
+        console.log(entryData);
     }
 
     const handleDone = () => {
@@ -48,6 +51,9 @@ function EntrySummary() {
             console.log(entryData);
             setEntryText(entryData.entryText);
             setEmotion(entryData.emotion);
+        } else {
+            setEntryText("");
+            setEmotion(Emotion.Neutral);
         }
     }, [entryDate]);
 
@@ -69,7 +75,7 @@ function EntrySummary() {
                             onChange={handleEntryChange} 
                             placeholder="Edit to write how you feel today..." 
                             className={getStyle(styles, "input")} 
-                            maxLength={600}
+                            maxLength={800}
                         />
                     </div>
                     <div className={getStyle(styles, "btnsWrapper")}>

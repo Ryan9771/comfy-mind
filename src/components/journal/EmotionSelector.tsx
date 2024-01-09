@@ -10,7 +10,6 @@ interface Props {
 }
 
 function EmotionSelector({ givenEmotion, onChangeEmotion }: Props) {
-
     const clickHandler = (emotion: Emotion) => {
         onChangeEmotion(emotion);
     }
