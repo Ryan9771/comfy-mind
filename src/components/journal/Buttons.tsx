@@ -15,7 +15,8 @@ const styles = {
         "flex",
         "items-center",
         "cursor-pointer",
-        "hover:bg-blue-2"
+        "hover:bg-blue-2",
+        "select-none",
     ],
     buttonGeneral: [
         "flex",
@@ -26,7 +27,8 @@ const styles = {
         "rounded-lg",
         "cursor-pointer",
         "px-2",
-        "py-1.5"
+        "py-1.5",
+        "select-none"
     ],
     saveBtn: [
         "bg-green-1",

@@ -1,24 +1,30 @@
 import getStyle from "../util/Styles";
 import DatePicker from "../components/journal/DatePicker";
 import EmotionSelector from "../components/journal/EmotionSelector";
-import EntryBox from "../components/journal/EntryBox";
 import { AnalyseButton, SaveButton, DoneButton } from "../components/journal/Buttons";
 import { useState } from 'react';
 
 // TODO: Try using local storage first to store dates and their entries
-// TODO: Add link between edit buttons and entry box
 
 function EntrySummary() {
     
+    /* === Edit buttons state management === */
     const [entryEditable, setEntryEditable] = useState<boolean>(false);
     const handleSave = () => {
         console.log("Save button clicked")
         setEntryEditable(true);
+        console.log(entry);
     }
 
     const handleDone = () => {
         setEntryEditable(false);
         console.log("Done button clicked");
+    }
+
+    /* === Entry text state management === */
+    const [entry, setEntry] = useState<string>("");
+    const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setEntry(e.target.value);
     }
 
     return (
@@ -34,7 +40,13 @@ function EntrySummary() {
                         onClick={() => setEntryEditable(!entryEditable)}
                     >
                         <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
-                        <EntryBox />
+                        <textarea 
+                            value={entry} 
+                            onChange={handleEntryChange} 
+                            placeholder="Edit to write how you feel today..." 
+                            className={getStyle(styles, "input")} 
+                            maxLength={600}
+                        />
                     </div>
                     <div className={getStyle(styles, "btnsWrapper")}>
                         { !entryEditable ? <AnalyseButton onClick={() => console.log("Analyse button clicked")} /> : (
@@ -114,6 +126,16 @@ const styles = {
         "w-full",
         "items-center",
         "justify-around",
+    ],
+    input: [
+        "text-blue-1",
+        "p-4",
+        "rounded-xl",
+        "tracking-tight",
+        "h-full",
+        "overflow-y-auto",
+        "leading-5",
+        "focus:outline-none",
     ],
 };
 export default EntrySummary;
