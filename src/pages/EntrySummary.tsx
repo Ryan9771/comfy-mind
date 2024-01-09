@@ -6,11 +6,6 @@ import { useEffect, useState } from 'react';
 import { Emotion, JournalEntry } from "../util/Types";
 import { getStorageValue, setStorageValue } from "../util/LocalStorage";
 
-// TODO: Fix bug where sometimes clicking on entry doesn't cause buttons 
-//  to appear. Eg: Highlight entry and delete -> Doesnt cause buttons to show
-//  Potential Fix: Maybe instead of onClick, use onFocus and let the user click 
-//      cancel to remove buttons.
-
 function EntrySummary() {
     /* === Entry Text State Management === */
     const [entryText, setEntryText] = useState<string>("");
@@ -70,11 +65,12 @@ function EntrySummary() {
                 <div className={getStyle(styles, "bodyCtn")}>
                     <div 
                         className={getStyle(styles, "entryCtnWrapper")} 
-                        onClick={() => setEntryEditable(!entryEditable)}
+                        onClick={() => setEntryEditable(true)}
                     >
                         <p className={getStyle(styles, "bodyHeading")}>Your sanctuary - journal freely:</p>
                         <textarea 
                             value={entryText} 
+                            onFocus={() => setEntryEditable(true)}
                             onChange={handleEntryChange} 
                             placeholder="Edit to write how you feel today..." 
                             className={getStyle(styles, "input")} 
