@@ -1,7 +1,7 @@
 import getStyle from "../../util/Styles";
 import { LoginButton, SignupButton } from "./Buttons";
 
-function LoginPanel() {
+function AuthPanel() {
   return (
     <div className={getStyle(styles, "ctn")}>
       <div className={getStyle(styles, "titleCtn")}>
@@ -46,4 +46,4 @@ const styles = {
   signinBtnCtn: ["w-full", "pt-5", "lg:pt-7"],
 };
 
-export default LoginPanel;
+export default AuthPanel;
