@@ -13,6 +13,7 @@ const styles = {
     "cursor-pointer",
     "select-none",
     "hover:bg-green-2",
+    "lg:py-2",
   ],
   signupBtn: [
     "bg-blue-2",
@@ -26,6 +27,7 @@ const styles = {
     "cursor-pointer",
     "select-none",
     "hover:bg-blue-3",
+    "lg:py-2",
   ],
   txt: ["text-center", "w-full"],
 };

@@ -30,12 +30,20 @@ const styles = {
     "items-center",
     "rounded-lg",
     "shadow-md",
+    "lg:w-80",
   ],
-  titleCtn: ["w-full", "flex", "flex-col", "gap-2", "items-center"],
-  headingText: ["text-lg", "text-blue-2", "font-semibold"],
-  subHeadingText: ["text-blue-2", "text-center"],
-  loginBtnCtn: ["w-full", "pt-7", "pb-5", "border-b", "border-b-blue-2"],
-  signinBtnCtn: ["w-full", "pt-5"],
+  titleCtn: ["w-full", "flex", "flex-col", "gap-2", "items-center", "lg:gap-4"],
+  headingText: ["text-lg", "text-blue-2", "font-semibold", "lg:text-xl"],
+  subHeadingText: ["text-blue-2", "text-center", "lg:text-lg"],
+  loginBtnCtn: [
+    "w-full",
+    "pt-7",
+    "pb-5",
+    "border-b",
+    "border-b-blue-2",
+    "lg:pb-7",
+  ],
+  signinBtnCtn: ["w-full", "pt-5", "lg:pt-7"],
 };
 
 export default LoginPanel;
