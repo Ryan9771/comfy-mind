@@ -67,7 +67,6 @@ const styles = {
     "gap-2",
     "text-blue-2",
     "text-center",
-    "py-1",
     "cursor-pointer",
     "hover:font-semibold",
   ],
