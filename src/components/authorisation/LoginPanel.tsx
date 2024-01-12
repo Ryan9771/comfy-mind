@@ -1,4 +1,5 @@
 import getStyle from "../../util/Styles";
+import { SignupButton } from "./Buttons";
 
 // TODO: Add or make by regex a validation for email and password
 
@@ -17,6 +18,10 @@ function LoginPanel() {
           className={getStyle(styles, "textfields")}
           placeholder="Password"
         />
+        <div className={getStyle(styles, "continueBtn")}>continue</div>
+      </div>
+      <div className={getStyle(styles, "signinBtnCtn")}>
+        <SignupButton onClick={() => console.log("Login button clicked")} />
       </div>
     </div>
   );
@@ -46,7 +51,28 @@ const styles = {
     "focus:outline-none",
     // "lg:py-2",
   ],
-  loginCtn: ["flex", "flex-col", "w-full", "gap-4", "items-center"],
+  loginCtn: [
+    "flex",
+    "flex-col",
+    "w-full",
+    "gap-4",
+    "items-center",
+    "border-b",
+    "border-b-blue-2",
+    "pb-2",
+  ],
+  continueBtn: [
+    "flex",
+    "items-center",
+    "gap-2",
+    "text-blue-2",
+    "text-center",
+    "py-1",
+    "cursor-pointer",
+    "hover:font-semibold",
+  ],
+  signinBtnCtn: ["w-full", "pt-5", "lg:pt-7"],
+  continueBtnIcon: ["fill-blue-2", "w-4"],
 };
 
 export default LoginPanel;
