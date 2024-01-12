@@ -1,5 +1,8 @@
 import getStyle from "../../util/Styles";
 import { LoginButton } from "./Buttons";
+import { auth } from "../../services/firebaseConfig";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 // TODO: Add or make by regex a validation for email and password
 
@@ -8,6 +11,31 @@ interface Props {
 }
 
 function SignupPanel({ loginFunc }: Props) {
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [signupRePassword, setSignupRePassword] = useState("");
+
+  const signup = async () => {
+    try {
+      const user = createUserWithEmailAndPassword(
+        auth,
+        signupEmail,
+        signupPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignup = () => {
+    if (signupPassword === signupRePassword) {
+      signup();
+    } else {
+      console.log("Passwords do not match");
+    }
+  };
+
   return (
     <div className={getStyle(styles, "ctn")}>
       <div className={getStyle(styles, "loginBtnCtn")}>
@@ -19,18 +47,23 @@ function SignupPanel({ loginFunc }: Props) {
           type="email"
           className={getStyle(styles, "textfields")}
           placeholder="Email"
+          onChange={(e) => setSignupEmail(e.target.value)}
         />
         <input
           type="password"
           className={getStyle(styles, "textfields")}
           placeholder="Password"
+          onChange={(e) => setSignupPassword(e.target.value)}
         />
         <input
           type="password"
           className={getStyle(styles, "textfields")}
           placeholder="Re-enter Password"
+          onChange={(e) => setSignupRePassword(e.target.value)}
         />
-        <div className={getStyle(styles, "continueBtn")}>continue</div>
+        <div onClick={handleSignup} className={getStyle(styles, "continueBtn")}>
+          continue
+        </div>
       </div>
     </div>
   );

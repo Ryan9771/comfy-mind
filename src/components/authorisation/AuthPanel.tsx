@@ -6,6 +6,7 @@ interface Props {
   signupFunc: () => void;
 }
 
+// TODO: In each of loginpanel and signup pannel, add error handlings
 function AuthPanel({ loginFunc, signupFunc }: Props) {
   return (
     <div className={getStyle(styles, "ctn")}>
