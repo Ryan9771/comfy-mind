@@ -1,11 +1,12 @@
 import getStyle from "../util/Styles";
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import AuthPanel from "../components/authorisation/AuthPanel";
+// import AuthPanel from "../components/authorisation/AuthPanel";
+import LoginPanel from "../components/authorisation/LoginPanel";
 
 function Authorisation() {
   return (
     <div className={getStyle(styles, "ctn")}>
-      <AuthPanel />
+      <LoginPanel />
     </div>
   );
 }
