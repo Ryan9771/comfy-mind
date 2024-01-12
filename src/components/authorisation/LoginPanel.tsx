@@ -1,18 +1,22 @@
 import getStyle from "../../util/Styles";
 import { SignupButton } from "./Buttons";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { User, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
-// TODO: Add or make by regex a validation for email and password
 
 interface Props {
   signupFunc: () => void;
+  setUser: (user: User | null) => void;
 }
+
+// TODO: Add or make by regex a validation for email and password
 
 function LoginPanel({ signupFunc }: Props) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  /* Logs the user in and should redirect to journal page 
+    in Authoristion component as it watches changes in Auth state */
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
