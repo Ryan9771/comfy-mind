@@ -1,7 +1,12 @@
 import getStyle from "../../util/Styles";
 import { LoginButton, SignupButton } from "./Buttons";
 
-function AuthPanel() {
+interface Props {
+  loginFunc: () => void;
+  signupFunc: () => void;
+}
+
+function AuthPanel({ loginFunc, signupFunc }: Props) {
   return (
     <div className={getStyle(styles, "ctn")}>
       <div className={getStyle(styles, "titleCtn")}>
@@ -11,10 +16,10 @@ function AuthPanel() {
         </div>
       </div>
       <div className={getStyle(styles, "loginBtnCtn")}>
-        <LoginButton onClick={() => console.log("Login button clicked")} />
+        <LoginButton onClick={() => loginFunc()} />
       </div>
       <div className={getStyle(styles, "signinBtnCtn")}>
-        <SignupButton onClick={() => console.log("Login button clicked")} />
+        <SignupButton onClick={() => signupFunc()} />
       </div>
     </div>
   );

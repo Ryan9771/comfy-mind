@@ -48,5 +48,11 @@ export interface JournalEntries {
     [key: string]: JournalEntry;
 }
 
+export enum AuthState {
+    Default,
+    Login, 
+    Signup,
+}
+
 /* === Local Storage Navigation === */
 // journalDb -> { (hash(journalEntry.date) -> journalEntry) }

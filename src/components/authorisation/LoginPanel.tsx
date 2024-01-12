@@ -3,7 +3,11 @@ import { SignupButton } from "./Buttons";
 
 // TODO: Add or make by regex a validation for email and password
 
-function LoginPanel() {
+interface Props {
+  signupFunc: () => void;
+}
+
+function LoginPanel({ signupFunc }: Props) {
   return (
     <div className={getStyle(styles, "ctn")}>
       <div className={getStyle(styles, "loginCtn")}>
@@ -21,7 +25,7 @@ function LoginPanel() {
         <div className={getStyle(styles, "continueBtn")}>continue</div>
       </div>
       <div className={getStyle(styles, "signinBtnCtn")}>
-        <SignupButton onClick={() => console.log("Login button clicked")} />
+        <SignupButton onClick={() => signupFunc()} />
       </div>
     </div>
   );
