@@ -9,8 +9,14 @@ import {
 import { useEffect, useState } from "react";
 import { Emotion, JournalEntry } from "../util/Types";
 import { getStorageValue, setStorageValue } from "../util/LocalStorage";
+import { getAuth } from "firebase/auth";
+import { usersCollection } from "../services/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 function EntrySummary() {
+  /* Gets the current userID */
+  const uid = getAuth().currentUser?.uid;
+
   /* === Entry Text State Management === */
   const [entryText, setEntryText] = useState<string>("");
   const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -57,6 +63,22 @@ function EntrySummary() {
       setEntryText("");
       setEmotion(Emotion.Neutral);
     }
+
+    /* === Load Data into correct states using firestore === */
+    const docRef = doc(
+      usersCollection,
+      `${uid}/entries/${entryDate.toDateString()}`
+    );
+
+    getDoc(docRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          console.log(doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => console.log(error));
   }, [entryDate]);
 
   return (

@@ -23,4 +23,4 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 // Specific collections in db
-export const entriesCollection = collection(db, "entries");
+export const usersCollection = collection(db, "users");
