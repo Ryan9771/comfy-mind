@@ -1,6 +1,7 @@
 // Functions needed from the Firebase SDK
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
+import { getFirestore, collection } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,5 +18,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Authentication
+// Needed services
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+// Specific collections in db
+export const entriesCollection = collection(db, "entries");
