@@ -14,9 +14,6 @@ import { usersCollection } from "../services/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
 function EntrySummary() {
-  /* Gets the current userID */
-  const uid = getAuth().currentUser?.uid;
-
   /* === Entry Text State Management === */
   const [entryText, setEntryText] = useState<string>("");
   const handleEntryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,6 +48,9 @@ function EntrySummary() {
     setEntryEditable(false);
     console.log("Done button clicked");
   };
+
+  /* Gets the current userID */
+  const uid = getAuth().currentUser?.uid;
 
   /* === Load Data into correct states using local storage === */
   useEffect(() => {
