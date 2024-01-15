@@ -15,6 +15,7 @@ function SignupPanel({ loginFunc }: Props) {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupRePassword, setSignupRePassword] = useState("");
 
+  // TODO: Change this to the .then() method so that database for that user can be created
   const signup = async () => {
     try {
       const user = createUserWithEmailAndPassword(
