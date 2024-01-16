@@ -11,7 +11,14 @@ import { Emotion, JournalEntry } from "../util/Types";
 import { getStorageValue, setStorageValue } from "../util/LocalStorage";
 import { getAuth } from "firebase/auth";
 import { usersCollection } from "../services/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  setDoc,
+} from "firebase/firestore";
 
 function EntrySummary() {
   /* === Entry Text State Management === */
@@ -40,6 +47,66 @@ function EntrySummary() {
       entryText: entryText,
     };
     setStorageValue(entryDate.toDateString(), entryData);
+
+    /* Firestore Related */
+    // Reference to the user document
+    // const userRef = db.collection("Users").doc(userId);
+    const userRef = doc(usersCollection, uid);
+
+    // Reference to the 'dates' subcollection under the user document
+    const datesCollectionRef = collection(userRef, `${uid}/entries`);
+
+    // Reference to the date document under the 'dates' subcollection
+    const dateDocumentRef = doc(datesCollectionRef, entryDate.toDateString());
+
+    // Perform the conditional check
+    getDoc(userRef)
+      .then((userDoc) => {
+        if (!userDoc.exists) {
+          // User document doesn't exist, create it
+          return setDoc(userRef, {});
+          // return userRef.set({});
+        } else {
+          // User document exists, check the 'dates' subcollection
+          return Promise.resolve();
+        }
+      })
+      .then(() => {
+        // Check if the 'dates' subcollection exists
+        return getDocs(datesCollectionRef);
+      })
+      .then((datesCollectionSnapshot) => {
+        if (datesCollectionSnapshot.empty) {
+          // 'dates' subcollection doesn't exist, create it
+          return datesCollectionRef.add({});
+        } else {
+          // 'dates' subcollection exists, check the date document
+          return Promise.resolve();
+        }
+      })
+      .then(() => {
+        // Check if the date document exists
+        return dateDocumentRef.get();
+      })
+      .then((dateDoc) => {
+        if (!dateDoc.exists) {
+          // Date document doesn't exist, create it
+          return dateDocumentRef.set({
+            emotion: "",
+            entry: "",
+          });
+        } else {
+          // Date document already exists
+          console.log("Date document already exists:", dateDocumentRef.id);
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Error performing conditional check and creating documents:",
+          error
+        );
+      });
+
     console.log("=== Entry Submitted ===");
     console.log(entryData);
   };
