@@ -39,13 +39,8 @@ export function emotionToString(emotion: Emotion): string {
 }
 
 export interface JournalEntry {
-    date: Date;
     emotion: Emotion;
-    entryText: string;
-}
-
-export interface JournalEntries {
-    [key: string]: JournalEntry;
+    entry: string;
 }
 
 export enum AuthState {
@@ -55,4 +50,4 @@ export enum AuthState {
 }
 
 /* === Local Storage Navigation === */
-// journalDb -> { (hash(journalEntry.date) -> journalEntry) }
+// /users/{uid}/entries/{dateString}

@@ -8,11 +8,12 @@ import {
 } from "../components/journal/Buttons";
 import { useEffect, useState } from "react";
 import { Emotion, JournalEntry } from "../util/Types";
-import { getStorageValue, setStorageValue } from "../util/LocalStorage";
-import { getAuth } from "firebase/auth";
-import { usersCollection } from "../services/firebaseConfig";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth, usersCollection } from "../services/firebaseConfig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
+// TODO: Implement a hybrid of local storage & firestore to store journal entries to reduce
+//  number of reads
 function EntrySummary() {
   /* === Entry Text State Management === */
   const [entryText, setEntryText] = useState<string>("");
@@ -32,8 +33,10 @@ function EntrySummary() {
 
   /* === Edit buttons state management === */
   const [entryEditable, setEntryEditable] = useState<boolean>(false);
+
   const handleSave = () => {
     setEntryEditable(true);
+
     /* Gets the current userID */
     const uid = getAuth().currentUser?.uid;
 
@@ -52,9 +55,10 @@ function EntrySummary() {
       Lazily creates the user's document & the 'entries' subcollection & document
       if they don't exist
     */
+    // TODO: See if dateDocumentRef can be directly used to create even user doc
     getDoc(userRef)
       .then((userDoc) => {
-        if (!userDoc.exists) {
+        if (!userDoc.exists()) {
           // Creates an empty user document
           return setDoc(userRef, {});
         } else {
@@ -66,6 +70,9 @@ function EntrySummary() {
           emotion: emotion,
           entry: entryText,
         });
+      })
+      .then(() => {
+        console.log("Document successfully written!");
       })
       .catch((error) => {
         console.error("Error creating user document:", error);
@@ -79,32 +86,31 @@ function EntrySummary() {
 
   /* === Load Data into correct states using local storage === */
   useEffect(() => {
-    const entryData = getStorageValue(entryDate.toDateString());
-    if (entryData) {
-      console.log(entryData);
-      setEntryText(entryData.entryText);
-      setEmotion(entryData.emotion);
-    } else {
-      setEntryText("");
-      setEmotion(Emotion.Neutral);
-    }
-
-    /* === Load Data into correct states using firestore === */
-    // TODO: Figure out how to prevent extra reads upon reloading website multiple times
-    // const docRef = doc(
-    //   usersCollection,
-    //   `${uid}/entries/${entryDate.toDateString()}`
-    // );
-
-    // getDoc(docRef)
-    //   .then((doc) => {
-    //     if (doc.exists()) {
-    //       console.log(doc.data());
-    //     } else {
-    //       console.log("No such document!");
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
+    onAuthStateChanged(auth, (currUser) => {
+      if (currUser) {
+        const dateDocumentRef = doc(
+          usersCollection,
+          currUser.uid,
+          "entries",
+          entryDate.toDateString()
+        );
+        getDoc(dateDocumentRef)
+          .then((doc) => {
+            if (doc.exists()) {
+              const data = doc.data() as JournalEntry;
+              console.log(data);
+              setEmotion(data.emotion);
+              setEntryText(data.entry);
+            } else {
+              setEmotion(Emotion.Neutral);
+              setEntryText("");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
+          });
+      }
+    });
   }, [entryDate]);
 
   return (
