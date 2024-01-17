@@ -8,7 +8,7 @@ import {
 } from "../components/journal/Buttons";
 import { useEffect, useState } from "react";
 import { Emotion, JournalEntry } from "../util/Types";
-import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, usersCollection } from "../services/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -40,9 +40,6 @@ function EntrySummary() {
     /* Gets the current userID */
     const uid = getAuth().currentUser?.uid;
 
-    // Reference to the user's document
-    const userRef = doc(usersCollection, uid);
-
     // Reference to user's particular entry for the given date
     const dateDocumentRef = doc(
       usersCollection,
@@ -52,25 +49,13 @@ function EntrySummary() {
     );
 
     /* 
-      Lazily creates the user's document & the 'entries' subcollection & document
+      Creates the user's document & the 'entries' subcollection & document
       if they don't exist
     */
-    // TODO: See if dateDocumentRef can be directly used to create even user doc
-    getDoc(userRef)
-      .then((userDoc) => {
-        if (!userDoc.exists()) {
-          // Creates an empty user document
-          return setDoc(userRef, {});
-        } else {
-          return Promise.resolve();
-        }
-      })
-      .then(() => {
-        return setDoc(dateDocumentRef, {
-          emotion: emotion,
-          entry: entryText,
-        });
-      })
+    setDoc(dateDocumentRef, {
+      emotion: emotion,
+      entry: entryText,
+    })
       .then(() => {
         console.log("Document successfully written!");
       })
@@ -81,11 +66,11 @@ function EntrySummary() {
 
   const handleDone = () => {
     setEntryEditable(false);
-    console.log("Done button clicked");
   };
 
-  /* === Load Data into correct states using local storage === */
+  /* === Load Data into correct states using firestore === */
   useEffect(() => {
+    // Gets the current user
     onAuthStateChanged(auth, (currUser) => {
       if (currUser) {
         const dateDocumentRef = doc(
@@ -94,11 +79,12 @@ function EntrySummary() {
           "entries",
           entryDate.toDateString()
         );
+
+        // Gets the user's entry for the given date and populates respective states
         getDoc(dateDocumentRef)
           .then((doc) => {
             if (doc.exists()) {
               const data = doc.data() as JournalEntry;
-              console.log(data);
               setEmotion(data.emotion);
               setEntryText(data.entry);
             } else {
