@@ -11,14 +11,7 @@ import { Emotion, JournalEntry } from "../util/Types";
 import { getStorageValue, setStorageValue } from "../util/LocalStorage";
 import { getAuth } from "firebase/auth";
 import { usersCollection } from "../services/firebaseConfig";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  limit,
-  setDoc,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 
 function EntrySummary() {
   /* === Entry Text State Management === */
@@ -41,83 +34,48 @@ function EntrySummary() {
   const [entryEditable, setEntryEditable] = useState<boolean>(false);
   const handleSave = () => {
     setEntryEditable(true);
-    const entryData: JournalEntry = {
-      date: entryDate,
-      emotion: emotion,
-      entryText: entryText,
-    };
-    setStorageValue(entryDate.toDateString(), entryData);
+    /* Gets the current userID */
+    const uid = getAuth().currentUser?.uid;
 
-    /* Firestore Related */
-    // Reference to the user document
-    // const userRef = db.collection("Users").doc(userId);
+    // Reference to the user's document
     const userRef = doc(usersCollection, uid);
 
-    // Reference to the 'dates' subcollection under the user document
-    const datesCollectionRef = collection(userRef, `${uid}/entries`);
+    // Reference to user's particular entry for the given date
+    const dateDocumentRef = doc(
+      usersCollection,
+      uid,
+      "entries",
+      entryDate.toDateString()
+    );
 
-    // Reference to the date document under the 'dates' subcollection
-    const dateDocumentRef = doc(datesCollectionRef, entryDate.toDateString());
-
-    // Perform the conditional check
+    /* 
+      Lazily creates the user's document & the 'entries' subcollection & document
+      if they don't exist
+    */
     getDoc(userRef)
       .then((userDoc) => {
         if (!userDoc.exists) {
-          // User document doesn't exist, create it
+          // Creates an empty user document
           return setDoc(userRef, {});
-          // return userRef.set({});
         } else {
-          // User document exists, check the 'dates' subcollection
           return Promise.resolve();
         }
       })
       .then(() => {
-        // Check if the 'dates' subcollection exists
-        return getDocs(datesCollectionRef);
-      })
-      .then((datesCollectionSnapshot) => {
-        if (datesCollectionSnapshot.empty) {
-          // 'dates' subcollection doesn't exist, create it
-          return datesCollectionRef.add({});
-        } else {
-          // 'dates' subcollection exists, check the date document
-          return Promise.resolve();
-        }
-      })
-      .then(() => {
-        // Check if the date document exists
-        return dateDocumentRef.get();
-      })
-      .then((dateDoc) => {
-        if (!dateDoc.exists) {
-          // Date document doesn't exist, create it
-          return dateDocumentRef.set({
-            emotion: "",
-            entry: "",
-          });
-        } else {
-          // Date document already exists
-          console.log("Date document already exists:", dateDocumentRef.id);
-        }
+        return setDoc(dateDocumentRef, {
+          emotion: emotion,
+          entry: entryText,
+        });
       })
       .catch((error) => {
-        console.error(
-          "Error performing conditional check and creating documents:",
-          error
-        );
+        console.error("Error creating user document:", error);
       });
-
-    console.log("=== Entry Submitted ===");
-    console.log(entryData);
   };
 
   const handleDone = () => {
     setEntryEditable(false);
     console.log("Done button clicked");
   };
-
-  /* Gets the current userID */
-  const uid = getAuth().currentUser?.uid;
 
   /* === Load Data into correct states using local storage === */
   useEffect(() => {
@@ -132,20 +90,21 @@ function EntrySummary() {
     }
 
     /* === Load Data into correct states using firestore === */
-    const docRef = doc(
-      usersCollection,
-      `${uid}/entries/${entryDate.toDateString()}`
-    );
+    // TODO: Figure out how to prevent extra reads upon reloading website multiple times
+    // const docRef = doc(
+    //   usersCollection,
+    //   `${uid}/entries/${entryDate.toDateString()}`
+    // );
 
-    getDoc(docRef)
-      .then((doc) => {
-        if (doc.exists()) {
-          console.log(doc.data());
-        } else {
-          console.log("No such document!");
-        }
-      })
-      .catch((error) => console.log(error));
+    // getDoc(docRef)
+    //   .then((doc) => {
+    //     if (doc.exists()) {
+    //       console.log(doc.data());
+    //     } else {
+    //       console.log("No such document!");
+    //     }
+    //   })
+    //   .catch((error) => console.log(error));
   }, [entryDate]);
 
   return (
