@@ -1,12 +1,11 @@
 import getStyle from "../../util/Styles";
 import { SignupButton } from "./Buttons";
 import { useState } from "react";
-import { User, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
 
 interface Props {
   signupFunc: () => void;
-  setUser: (user: User | null) => void;
 }
 
 // TODO: Add or make by regex a validation for email and password

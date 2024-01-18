@@ -5,7 +5,7 @@ import SignupPanel from "../components/authorisation/SignupPanel";
 import { AuthState } from "../util/Types";
 import { useCallback, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebaseConfig";
 
 function Authorisation() {
@@ -21,24 +21,20 @@ function Authorisation() {
     setAuthState(AuthState.Signup);
   }, []);
 
-  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   /* Checks if the user login state is changed */
-  onAuthStateChanged(auth, (currUser) => {
-    if (currUser) {
-      setUser(currUser);
-    } else {
-      setUser(null);
-    }
-  });
 
   /* Redirects user to journal page if user is logged in on load */
-  useEffect(() => {
-    if (user) {
-      navigate("/journal");
-    }
-  }, [user]);
+  useEffect(
+    () =>
+      onAuthStateChanged(auth, (currUser) => {
+        if (currUser) {
+          navigate("/journal");
+        }
+      }),
+    []
+  );
 
   /* Gets the correct auth panel based on which button is clicked */
   const getPanel = useCallback(() => {
@@ -51,9 +47,7 @@ function Authorisation() {
           />
         );
       case AuthState.Login:
-        return (
-          <LoginPanel signupFunc={setAuthStateToSignup} setUser={setUser} />
-        );
+        return <LoginPanel signupFunc={setAuthStateToSignup} />;
       case AuthState.Signup:
         return <SignupPanel loginFunc={setAuthStateToLogin} />;
     }

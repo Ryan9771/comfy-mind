@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Authorisation />} />
         <Route path="/journal" element={<EntrySummary />} />
+        <Route path="*" element={<Authorisation />} />
         {/* TODO: Add error 404 Page */}
       </Routes>
       <Footer />
