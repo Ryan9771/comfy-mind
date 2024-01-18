@@ -9,8 +9,8 @@ function App() {
     <HashRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<EntrySummary />} />
-        <Route path="/auth" element={<Authorisation />} />
+        <Route path="/" element={<Authorisation />} />
+        <Route path="/journal" element={<EntrySummary />} />
         {/* TODO: Add error 404 Page */}
       </Routes>
       <Footer />
