@@ -29,7 +29,9 @@ function SignupPanel({ loginFunc }: Props) {
     if (signupPassword === signupRePassword) {
       signup();
     } else {
-      console.log("Passwords do not match");
+      setSignupPassword("");
+      setSignupRePassword("");
+      alert("Passwords do not match");
     }
   };
 

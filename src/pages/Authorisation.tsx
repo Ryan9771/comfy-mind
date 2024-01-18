@@ -3,7 +3,7 @@ import AuthPanel from "../components/authorisation/AuthPanel";
 import LoginPanel from "../components/authorisation/LoginPanel";
 import SignupPanel from "../components/authorisation/SignupPanel";
 import { AuthState } from "../util/Types";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebaseConfig";
@@ -17,13 +17,10 @@ function Authorisation() {
   }, []);
 
   const setAuthStateToSignup = useCallback(() => {
-    console.log("setAuthStateToSignup called");
     setAuthState(AuthState.Signup);
   }, []);
 
   const navigate = useNavigate();
-
-  /* Checks if the user login state is changed */
 
   /* Redirects user to journal page if user is logged in on load */
   useEffect(
@@ -37,7 +34,7 @@ function Authorisation() {
   );
 
   /* Gets the correct auth panel based on which button is clicked */
-  const getPanel = useCallback(() => {
+  const getPanel = useMemo(() => {
     switch (authState) {
       case AuthState.Default:
         return (
@@ -53,7 +50,7 @@ function Authorisation() {
     }
   }, [authState]);
 
-  return <div className={getStyle(styles, "ctn")}>{getPanel()}</div>;
+  return <div className={getStyle(styles, "ctn")}>{getPanel}</div>;
 }
 
 const styles = {
