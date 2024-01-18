@@ -69,6 +69,8 @@ function EntrySummary() {
     setEntryEditable(false);
   };
 
+  const navigate = useNavigate();
+
   /* === Load Data into correct states using firestore === */
   useEffect(() => {
     // Gets the current user
@@ -97,7 +99,7 @@ function EntrySummary() {
             console.log("Error getting document:", error);
           });
       } else {
-        const navigate = useNavigate();
+        console.log("No user detected!");
         navigate("/");
       }
     });
