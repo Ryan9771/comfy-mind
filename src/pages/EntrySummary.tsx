@@ -12,6 +12,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, usersCollection } from "../services/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Ai from "../assets/ai.png";
 
 // TODO: Implement a hybrid of local storage & firestore to store journal entries to reduce
 //  number of reads
@@ -35,8 +36,13 @@ function EntrySummary() {
   /* === Edit buttons state management === */
   const [entryEditable, setEntryEditable] = useState<boolean>(false);
 
-  /* === Analyse Button State Management */
+  /* === AI Analysis Related State Managements */
   const [analyseMode, setAnalyseMode] = useState<boolean>(false);
+  const [aiResponse, setAiResponse] = useState<string>(
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit ullamcorper dignissim cras tincidunt lobortis feugiat. Elit pellentesque habitant morbi tristique senectus. Et sollicitudin ac orci phasellus egestas tellus rutrum. Mattis pellentesque id nibh tortor id. Viverra adipiscing at in tellus. Feugiat nisl pretium fusce id velit ut tortor pretium viverra. Sed nisi lacus sed viverra tellus in hac habitasse. Pharetra massa massa ultricies mi quis hendrerit dolor magna eget. Ac tortor dignissim convallis aenean et. Nibh tortor id aliquet lectus proin. Duis ultricies lacus sed turpis tincidunt id. Faucibus et molestie ac feugiat sed lectus vestibulum. Vel eros donec ac odio tempor orci dapibus ultrices. Fermentum dui faucibus in ornare quam viverra orci sagittis eu. Pretium quam vulputate dignissim suspendisse in. Interdum consectetur libero id faucibus nisl tincidunt eget nullam non. Tristique magna sit amet purus. Urna id volutpat lacus laoreet non.
+
+    Ipsum dolor sit amet consectetur. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Tellus pellentesque eu tincidunt tortor aliquam. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Viverra orci sagittis eu volutpat odio facilisis mauris sit. Pretium lectus quam id leo in vitae turpis. Dolor sit amet consectetur adipiscing elit pellentesque habitant. At volutpat diam ut venenatis tellus in metus. Neque gravida in fermentum et sollicitudin. Iaculis at erat pellentesque adipiscing commodo elit. Sed arcu non odio euismod lacinia. Nam libero justo laoreet sit amet cursus. Risus feugiat in ante metus. Et tortor consequat id porta.`
+  );
 
   const handleSave = () => {
     setEntryEditable(true);
@@ -119,7 +125,17 @@ function EntrySummary() {
       </div>
       <div className={getStyle(styles, "bodyCtnWrapper")}>
         {analyseMode ? (
-          <div className={getStyle(styles, "bodyCtn")}>Analysis</div>
+          <div className={getStyle(styles, "bodyCtn")}>
+            <div className={getStyle(styles, "aiResponseCtn")}>
+              <img className="w-24" src={Ai} alt="AI Response Img" />
+              <div className="px-5 text-blue-1 italic overflow-y-scroll">
+                {aiResponse}
+              </div>
+              <div className={getStyle(styles, "btnsWrapper")}>
+                <DoneButton onClick={handleDone} />
+              </div>
+            </div>
+          </div>
         ) : (
           <div className={getStyle(styles, "bodyCtn")}>
             <div
@@ -207,6 +223,14 @@ const styles = {
     "overflow-y-auto",
     "leading-5",
     "focus:outline-none",
+  ],
+  aiResponseCtn: [
+    "flex",
+    "flex-col",
+    "w-full",
+    "gap-6",
+    // "h-5/6",
+    "items-center",
   ],
 };
 export default EntrySummary;
