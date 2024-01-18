@@ -35,6 +35,9 @@ function EntrySummary() {
   /* === Edit buttons state management === */
   const [entryEditable, setEntryEditable] = useState<boolean>(false);
 
+  /* === Analyse Button State Management */
+  const [analyseMode, setAnalyseMode] = useState<boolean>(false);
+
   const handleSave = () => {
     setEntryEditable(true);
 
@@ -115,36 +118,38 @@ function EntrySummary() {
         />
       </div>
       <div className={getStyle(styles, "bodyCtnWrapper")}>
-        <div className={getStyle(styles, "bodyCtn")}>
-          <div
-            className={getStyle(styles, "entryCtnWrapper")}
-            onClick={() => setEntryEditable(true)}
-          >
-            <p className={getStyle(styles, "bodyHeading")}>
-              Your sanctuary - journal freely:
-            </p>
-            <textarea
-              value={entryText}
-              onFocus={() => setEntryEditable(true)}
-              onChange={handleEntryChange}
-              placeholder="Edit to write how you feel today..."
-              className={getStyle(styles, "input")}
-              maxLength={800}
-            />
-          </div>
-          <div className={getStyle(styles, "btnsWrapper")}>
-            {!entryEditable ? (
-              <AnalyseButton
-                onClick={() => console.log("Analyse button clicked")}
+        {analyseMode ? (
+          <div className={getStyle(styles, "bodyCtn")}>Analysis</div>
+        ) : (
+          <div className={getStyle(styles, "bodyCtn")}>
+            <div
+              className={getStyle(styles, "entryCtnWrapper")}
+              onClick={() => setEntryEditable(true)}
+            >
+              <p className={getStyle(styles, "bodyHeading")}>
+                Your sanctuary - journal freely:
+              </p>
+              <textarea
+                value={entryText}
+                onFocus={() => setEntryEditable(true)}
+                onChange={handleEntryChange}
+                placeholder="Edit to write how you feel today..."
+                className={getStyle(styles, "input")}
+                maxLength={800}
               />
-            ) : (
-              <div className={getStyle(styles, "editBtnsCtn")}>
-                <DoneButton onClick={handleDone} />
-                <SaveButton onClick={handleSave} />
-              </div>
-            )}
+            </div>
+            <div className={getStyle(styles, "btnsWrapper")}>
+              {!entryEditable ? (
+                <AnalyseButton onClick={() => setAnalyseMode(true)} />
+              ) : (
+                <div className={getStyle(styles, "editBtnsCtn")}>
+                  <DoneButton onClick={handleDone} />
+                  <SaveButton onClick={handleSave} />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
