@@ -17,6 +17,7 @@ function Authorisation() {
   }, []);
 
   const setAuthStateToSignup = useCallback(() => {
+    console.log("setAuthStateToSignup called");
     setAuthState(AuthState.Signup);
   }, []);
 

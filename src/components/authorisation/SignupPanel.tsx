@@ -1,7 +1,7 @@
 import getStyle from "../../util/Styles";
 import { LoginButton } from "./Buttons";
 import { auth } from "../../services/firebaseConfig";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 // TODO: Add or make by regex a validation for email and password
@@ -15,18 +15,14 @@ function SignupPanel({ loginFunc }: Props) {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupRePassword, setSignupRePassword] = useState("");
 
-  // TODO: Change this to the .then() method so that database for that user can be created
-  const signup = async () => {
-    try {
-      const user = createUserWithEmailAndPassword(
-        auth,
-        signupEmail,
-        signupPassword
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
+  const signup = () => {
+    createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+      .then(() => {
+        console.log("Signed up!");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleSignup = () => {
@@ -36,6 +32,10 @@ function SignupPanel({ loginFunc }: Props) {
       console.log("Passwords do not match");
     }
   };
+
+  useEffect(() => {
+    console.log("Singup panel reached");
+  }, []);
 
   return (
     <div className={getStyle(styles, "ctn")}>
