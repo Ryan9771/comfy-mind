@@ -35,7 +35,7 @@ function Authorisation() {
   /* Redirects user to journal page if user is logged in on load */
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/journal");
     }
   }, [user]);
 

@@ -11,6 +11,7 @@ import { Emotion, JournalEntry } from "../util/Types";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, usersCollection } from "../services/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 // TODO: Implement a hybrid of local storage & firestore to store journal entries to reduce
 //  number of reads
@@ -95,6 +96,9 @@ function EntrySummary() {
           .catch((error) => {
             console.log("Error getting document:", error);
           });
+      } else {
+        const navigate = useNavigate();
+        navigate("/");
       }
     });
   }, [entryDate]);
