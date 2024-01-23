@@ -134,7 +134,7 @@ function EntrySummary() {
                 </p>
               </div>
               <div className={getStyle(styles, "btnsWrapper")}>
-                <DoneButton onClick={handleDone} />
+                <DoneButton onClick={() => setAnalyseMode(false)} />
               </div>
             </div>
           </div>
