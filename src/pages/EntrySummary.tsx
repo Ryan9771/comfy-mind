@@ -128,8 +128,10 @@ function EntrySummary() {
           <div className={getStyle(styles, "bodyCtn")}>
             <div className={getStyle(styles, "aiResponseCtn")}>
               <img className="w-24" src={Ai} alt="AI Response Img" />
-              <div className="px-5 text-blue-1 italic overflow-y-scroll">
-                {aiResponse}
+              <div className="px-5 flex w-full overflow-hidden">
+                <p className="text-blue-1 italic overflow-y-scroll">
+                  {aiResponse}
+                </p>
               </div>
               <div className={getStyle(styles, "btnsWrapper")}>
                 <DoneButton onClick={handleDone} />
@@ -224,13 +226,6 @@ const styles = {
     "leading-5",
     "focus:outline-none",
   ],
-  aiResponseCtn: [
-    "flex",
-    "flex-col",
-    "w-full",
-    "gap-6",
-    // "h-5/6",
-    "items-center",
-  ],
+  aiResponseCtn: ["flex", "flex-col", "w-full", "gap-6", "items-center"],
 };
 export default EntrySummary;
